@@ -17,6 +17,7 @@
               <h3 v-if="menu.menuName" class="mv__ttl mv__ttl__menu">{{ menu.menuName }}</h3>
               <p v-if="menu.menuImgUrl"><img :src="menu.menuImgUrl" alt=""></p>
               <p v-if="menu.menuTxt">{{ menu.menuTxt }}</p>
+              <p v-if="menu.created">{{ savedTime(menu.created) }}</p>
               <button @click="removeMenu(menu.menuId, menu.menuImgFile)">データ削除</button>
             </li>
           </ul>
@@ -77,6 +78,17 @@ export default {
     })
   },
   methods: {
+    //firestoreのタイムスタンプを表示用に加工
+    savedTime(t) {
+      const dbTime = t.toDate();
+      const year = dbTime.getFullYear();
+      const month = dbTime.getMonth() + 1;
+      const day = dbTime.getDate();
+      const hours = dbTime.getHours();
+      const minutes = dbTime.getMinutes();
+      const seconds = dbTime.getSeconds();
+      return `${year}年${month}月${day}日${hours}時${minutes}分${seconds}秒`;
+    },
     //firestoreにデータを追加
     addMenu() {
       addDoc(collection(db, 'menus'), {
