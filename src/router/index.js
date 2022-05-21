@@ -65,12 +65,27 @@ const routes = [
     name: 'Gmaps',
     component: () => import('../views/Gmaps.vue')
   },
+  {
+    path: '/link',
+    name: 'Link',
+    component: () => import('../views/Link.vue')
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  //別ページコンポーネントへのページ内リンク設定
+  scrollBehavior (to) {
+    if (to.hash) {
+      return {
+          selector: to.hash,
+          offset: { x: 0, y: 0 }
+      }
+    }
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

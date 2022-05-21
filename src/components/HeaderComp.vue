@@ -12,6 +12,7 @@
         <nav id="gnav" :class="{active: isActive}">
           <ul>
             <li @click="toggleActive"><router-link to="/">Home</router-link></li>
+            <li @click="toggleActive"><router-link to="/link">Link</router-link></li>
             <li @click="toggleActive"><router-link to="/setting-menu">管理画面-Menu</router-link></li>
             <li @click="toggleActive"><router-link to="/gmaps">Google Maps</router-link></li>
             <li @click="toggleActive"><router-link to="/stop-watch">Stop Watch</router-link></li>
