@@ -7,14 +7,16 @@ export default new Vuex.Store({
   //コンポーネントのdataに相当するもの
   state: {
     count: 2,
-    time: ''
+    time: '',
+    message:''
   },
   //算出プロパティに相当するもの
   getters: {
     // count: state => state.count,
     doubleCount: state => state.count * 2,
     tripleCount: state => state.count * 3,
-    time: state => state.time
+    time: state => state.time,
+    message: state => state.message
   },
   //メソッドに相当するもの
   mutations: {
@@ -40,6 +42,9 @@ export default new Vuex.Store({
       //曜日の取得
       let day = today.getDay();
       state.time = `${hour}:${min}:${sec}(${week[day]})`;
+    },
+    updateMessage(state,newMessage){
+      state.message = newMessage;
     }
   },
   actions: {
@@ -53,6 +58,9 @@ export default new Vuex.Store({
       setInterval(() => {
         commit('updateTime');
       }, 100)
+    },
+    updateMessage({commit},newMessage){
+      commit('updateMessage',newMessage)
     }
   },
   modules: {
